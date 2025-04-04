@@ -1,45 +1,75 @@
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+    value: true
 });
+exports.default = _filter;
 
-var _filter = require('./internal/filter');
+var _arrayMap = require('lodash/_arrayMap');
 
-var _filter2 = _interopRequireDefault(_filter);
+var _arrayMap2 = _interopRequireDefault(_arrayMap);
 
-var _doParallel = require('./internal/doParallel');
+var _isArrayLike = require('lodash/isArrayLike');
 
-var _doParallel2 = _interopRequireDefault(_doParallel);
+var _isArrayLike2 = _interopRequireDefault(_isArrayLike);
+
+var _baseProperty = require('lodash/_baseProperty');
+
+var _baseProperty2 = _interopRequireDefault(_baseProperty);
+
+var _noop = require('lodash/noop');
+
+var _noop2 = _interopRequireDefault(_noop);
+
+var _wrapAsync = require('./wrapAsync');
+
+var _wrapAsync2 = _interopRequireDefault(_wrapAsync);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-/**
- * Returns a new array of all the values in `coll` which pass an async truth
- * test. This operation is performed in parallel, but the results array will be
- * in the same order as the original.
- *
- * @name filter
- * @static
- * @memberOf module:Collections
- * @method
- * @alias select
- * @category Collection
- * @param {Array|Iterable|Object} coll - A collection to iterate over.
- * @param {Function} iteratee - A truth test to apply to each item in `coll`.
- * The `iteratee` is passed a `callback(err, truthValue)`, which must be called
- * with a boolean argument once it has completed. Invoked with (item, callback).
- * @param {Function} [callback] - A callback which is called after all the
- * `iteratee` functions have finished. Invoked with (err, results).
- * @example
- *
- * async.filter(['file1','file2','file3'], function(filePath, callback) {
- *     fs.access(filePath, function(err) {
- *         callback(null, !err)
- *     });
- * }, function(err, results) {
- *     // results now equals an array of the existing files
- * });
- */
-exports.default = (0, _doParallel2.default)(_filter2.default);
+function filterArray(eachfn, arr, iteratee, callback) {
+    var truthValues = new Array(arr.length);
+    eachfn(arr, function (x, index, callback) {
+        iteratee(x, function (err, v) {
+            truthValues[index] = !!v;
+            callback(err);
+        });
+    }, function (err) {
+        if (err) return callback(err);
+        var results = [];
+        for (var i = 0; i < arr.length; i++) {
+            if (truthValues[i]) results.push(arr[i]);
+        }
+        callback(null, results);
+    });
+}
+
+function filterGeneric(eachfn, coll, iteratee, callback) {
+    var results = [];
+    eachfn(coll, function (x, index, callback) {
+        iteratee(x, function (err, v) {
+            if (err) {
+                callback(err);
+            } else {
+                if (v) {
+                    results.push({ index: index, value: x });
+                }
+                callback();
+            }
+        });
+    }, function (err) {
+        if (err) {
+            callback(err);
+        } else {
+            callback(null, (0, _arrayMap2.default)(results.sort(function (a, b) {
+                return a.index - b.index;
+            }), (0, _baseProperty2.default)('value')));
+        }
+    });
+}
+
+function _filter(eachfn, coll, iteratee, callback) {
+    var filter = (0, _isArrayLike2.default)(coll) ? filterArray : filterGeneric;
+    filter(eachfn, coll, (0, _wrapAsync2.default)(iteratee), callback || _noop2.default);
+}
 module.exports = exports['default'];
