@@ -1,95 +1,83 @@
 {
   "_args": [
     [
-      "debug@2.6.9",
+      "depd@1.1.2",
       "/Users/angelayu/Desktop/ejs-challenge"
     ]
   ],
-  "_from": "debug@2.6.9",
-  "_id": "debug@2.6.9",
+  "_from": "depd@1.1.2",
+  "_id": "depd@1.1.2",
   "_inBundle": false,
-  "_integrity": "sha512-bC7ElrdJaJnPbAP+1EotYvqZsb3ecl5wi6Bfi6BJTUcNowp6cvspg0jXznRTKDjm/E7AdgFBVeAPVMNcKGsHMA==",
-  "_location": "/debug",
+  "_integrity": "sha1-m81S4UwJd2PnSbJ0xDRu0uVgtak=",
+  "_location": "/depd",
   "_phantomChildren": {},
   "_requested": {
     "type": "version",
     "registry": true,
-    "raw": "debug@2.6.9",
-    "name": "debug",
-    "escapedName": "debug",
-    "rawSpec": "2.6.9",
+    "raw": "depd@1.1.2",
+    "name": "depd",
+    "escapedName": "depd",
+    "rawSpec": "1.1.2",
     "saveSpec": null,
-    "fetchSpec": "2.6.9"
+    "fetchSpec": "1.1.2"
   },
   "_requiredBy": [
     "/body-parser",
     "/express",
     "/express/body-parser",
-    "/finalhandler",
+    "/http-errors",
     "/send"
   ],
-  "_resolved": "https://registry.npmjs.org/debug/-/debug-2.6.9.tgz",
-  "_spec": "2.6.9",
+  "_resolved": "https://registry.npmjs.org/depd/-/depd-1.1.2.tgz",
+  "_spec": "1.1.2",
   "_where": "/Users/angelayu/Desktop/ejs-challenge",
   "author": {
-    "name": "TJ Holowaychuk",
-    "email": "tj@vision-media.ca"
+    "name": "Douglas Christopher Wilson",
+    "email": "doug@somethingdoug.com"
   },
-  "browser": "./src/browser.js",
+  "browser": "lib/browser/index.js",
   "bugs": {
-    "url": "https://github.com/visionmedia/debug/issues"
+    "url": "https://github.com/dougwilson/nodejs-depd/issues"
   },
-  "component": {
-    "scripts": {
-      "debug/index.js": "browser.js",
-      "debug/debug.js": "debug.js"
-    }
-  },
-  "contributors": [
-    {
-      "name": "Nathan Rajlich",
-      "email": "nathan@tootallnate.net",
-      "url": "http://n8.io"
-    },
-    {
-      "name": "Andrew Rhyne",
-      "email": "rhyneandrew@gmail.com"
-    }
-  ],
-  "dependencies": {
-    "ms": "2.0.0"
-  },
-  "description": "small debugging utility",
+  "description": "Deprecate all the things",
   "devDependencies": {
-    "browserify": "9.0.3",
-    "chai": "^3.5.0",
-    "concurrently": "^3.1.0",
-    "coveralls": "^2.11.15",
-    "eslint": "^3.12.1",
-    "istanbul": "^0.4.5",
-    "karma": "^1.3.0",
-    "karma-chai": "^0.1.0",
-    "karma-mocha": "^1.3.0",
-    "karma-phantomjs-launcher": "^1.0.2",
-    "karma-sinon": "^1.0.5",
-    "mocha": "^3.2.0",
-    "mocha-lcov-reporter": "^1.2.0",
-    "rimraf": "^2.5.4",
-    "sinon": "^1.17.6",
-    "sinon-chai": "^2.8.0"
+    "beautify-benchmark": "0.2.4",
+    "benchmark": "2.1.4",
+    "eslint": "3.19.0",
+    "eslint-config-standard": "7.1.0",
+    "eslint-plugin-markdown": "1.0.0-beta.7",
+    "eslint-plugin-promise": "3.6.0",
+    "eslint-plugin-standard": "3.0.1",
+    "istanbul": "0.4.5",
+    "mocha": "~1.21.5"
   },
-  "homepage": "https://github.com/visionmedia/debug#readme",
+  "engines": {
+    "node": ">= 0.6"
+  },
+  "files": [
+    "lib/",
+    "History.md",
+    "LICENSE",
+    "index.js",
+    "Readme.md"
+  ],
+  "homepage": "https://github.com/dougwilson/nodejs-depd#readme",
   "keywords": [
-    "debug",
-    "log",
-    "debugger"
+    "deprecate",
+    "deprecated"
   ],
   "license": "MIT",
-  "main": "./src/index.js",
-  "name": "debug",
+  "name": "depd",
   "repository": {
     "type": "git",
-    "url": "git://github.com/visionmedia/debug.git"
+    "url": "git+https://github.com/dougwilson/nodejs-depd.git"
   },
-  "version": "2.6.9"
+  "scripts": {
+    "bench": "node benchmark/index.js",
+    "lint": "eslint --plugin markdown --ext js,md .",
+    "test": "mocha --reporter spec --bail test/",
+    "test-ci": "istanbul cover node_modules/mocha/bin/_mocha --report lcovonly -- --reporter spec --no-exit test/",
+    "test-cov": "istanbul cover node_modules/mocha/bin/_mocha -- --reporter dot test/"
+  },
+  "version": "1.1.2"
 }
