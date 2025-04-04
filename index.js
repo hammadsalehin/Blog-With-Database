@@ -1,6 +1,6 @@
 /*!
- * encodeurl
- * Copyright(c) 2016 Douglas Christopher Wilson
+ * etag
+ * Copyright(c) 2014-2016 Douglas Christopher Wilson
  * MIT Licensed
  */
 
@@ -11,50 +11,121 @@
  * @public
  */
 
-module.exports = encodeUrl
+module.exports = etag
 
 /**
- * RegExp to match non-URL code points, *after* encoding (i.e. not including "%")
- * and including invalid escape sequences.
+ * Module dependencies.
  * @private
  */
 
-var ENCODE_CHARS_REGEXP = /(?:[^\x21\x25\x26-\x3B\x3D\x3F-\x5B\x5D\x5F\x61-\x7A\x7E]|%(?:[^0-9A-Fa-f]|[0-9A-Fa-f][^0-9A-Fa-f]|$))+/g
+var crypto = require('crypto')
+var Stats = require('fs').Stats
 
 /**
- * RegExp to match unmatched surrogate pair.
+ * Module variables.
  * @private
  */
 
-var UNMATCHED_SURROGATE_PAIR_REGEXP = /(^|[^\uD800-\uDBFF])[\uDC00-\uDFFF]|[\uD800-\uDBFF]([^\uDC00-\uDFFF]|$)/g
+var toString = Object.prototype.toString
 
 /**
- * String to replace unmatched surrogate pair with.
- * @private
- */
-
-var UNMATCHED_SURROGATE_PAIR_REPLACE = '$1\uFFFD$2'
-
-/**
- * Encode a URL to a percent-encoded form, excluding already-encoded sequences.
+ * Generate an entity tag.
  *
- * This function will take an already-encoded URL and encode all the non-URL
- * code points. This function will not encode the "%" character unless it is
- * not part of a valid sequence (`%20` will be left as-is, but `%foo` will
- * be encoded as `%25foo`).
- *
- * This encode is meant to be "safe" and does not throw errors. It will try as
- * hard as it can to properly encode the given URL, including replacing any raw,
- * unpaired surrogate pairs with the Unicode replacement character prior to
- * encoding.
- *
- * @param {string} url
+ * @param {Buffer|string} entity
  * @return {string}
+ * @private
+ */
+
+function entitytag (entity) {
+  if (entity.length === 0) {
+    // fast-path empty
+    return '"0-2jmj7l5rSw0yVb/vlWAYkK/YBwk"'
+  }
+
+  // compute hash of entity
+  var hash = crypto
+    .createHash('sha1')
+    .update(entity, 'utf8')
+    .digest('base64')
+    .substring(0, 27)
+
+  // compute length of entity
+  var len = typeof entity === 'string'
+    ? Buffer.byteLength(entity, 'utf8')
+    : entity.length
+
+  return '"' + len.toString(16) + '-' + hash + '"'
+}
+
+/**
+ * Create a simple ETag.
+ *
+ * @param {string|Buffer|Stats} entity
+ * @param {object} [options]
+ * @param {boolean} [options.weak]
+ * @return {String}
  * @public
  */
 
-function encodeUrl (url) {
-  return String(url)
-    .replace(UNMATCHED_SURROGATE_PAIR_REGEXP, UNMATCHED_SURROGATE_PAIR_REPLACE)
-    .replace(ENCODE_CHARS_REGEXP, encodeURI)
+function etag (entity, options) {
+  if (entity == null) {
+    throw new TypeError('argument entity is required')
+  }
+
+  // support fs.Stats object
+  var isStats = isstats(entity)
+  var weak = options && typeof options.weak === 'boolean'
+    ? options.weak
+    : isStats
+
+  // validate argument
+  if (!isStats && typeof entity !== 'string' && !Buffer.isBuffer(entity)) {
+    throw new TypeError('argument entity must be string, Buffer, or fs.Stats')
+  }
+
+  // generate entity tag
+  var tag = isStats
+    ? stattag(entity)
+    : entitytag(entity)
+
+  return weak
+    ? 'W/' + tag
+    : tag
+}
+
+/**
+ * Determine if object is a Stats object.
+ *
+ * @param {object} obj
+ * @return {boolean}
+ * @api private
+ */
+
+function isstats (obj) {
+  // genuine fs.Stats
+  if (typeof Stats === 'function' && obj instanceof Stats) {
+    return true
+  }
+
+  // quack quack
+  return obj && typeof obj === 'object' &&
+    'ctime' in obj && toString.call(obj.ctime) === '[object Date]' &&
+    'mtime' in obj && toString.call(obj.mtime) === '[object Date]' &&
+    'ino' in obj && typeof obj.ino === 'number' &&
+    'size' in obj && typeof obj.size === 'number'
+}
+
+/**
+ * Generate a tag for a stat.
+ *
+ * @param {object} stat
+ * @return {string}
+ * @private
+ */
+
+function stattag (stat) {
+  var mtime = stat.mtime.getTime().toString(16)
+  var size = stat.size.toString(16)
+
+  return '"' + size + '-' + mtime + '"'
 }

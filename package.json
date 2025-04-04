@@ -1,57 +1,64 @@
 {
   "_args": [
     [
-      "encodeurl@1.0.2",
+      "etag@1.8.1",
       "/Users/angelayu/Desktop/ejs-challenge"
     ]
   ],
-  "_from": "encodeurl@1.0.2",
-  "_id": "encodeurl@1.0.2",
+  "_from": "etag@1.8.1",
+  "_id": "etag@1.8.1",
   "_inBundle": false,
-  "_integrity": "sha1-rT/0yG7C0CkyL1oCw6mmBslbP1k=",
-  "_location": "/encodeurl",
+  "_integrity": "sha1-Qa4u62XvpiJorr/qg6x9eSmbCIc=",
+  "_location": "/etag",
   "_phantomChildren": {},
   "_requested": {
     "type": "version",
     "registry": true,
-    "raw": "encodeurl@1.0.2",
-    "name": "encodeurl",
-    "escapedName": "encodeurl",
-    "rawSpec": "1.0.2",
+    "raw": "etag@1.8.1",
+    "name": "etag",
+    "escapedName": "etag",
+    "rawSpec": "1.8.1",
     "saveSpec": null,
-    "fetchSpec": "1.0.2"
+    "fetchSpec": "1.8.1"
   },
   "_requiredBy": [
     "/express",
-    "/finalhandler",
-    "/send",
-    "/serve-static"
+    "/send"
   ],
-  "_resolved": "https://registry.npmjs.org/encodeurl/-/encodeurl-1.0.2.tgz",
-  "_spec": "1.0.2",
+  "_resolved": "https://registry.npmjs.org/etag/-/etag-1.8.1.tgz",
+  "_spec": "1.8.1",
   "_where": "/Users/angelayu/Desktop/ejs-challenge",
   "bugs": {
-    "url": "https://github.com/pillarjs/encodeurl/issues"
+    "url": "https://github.com/jshttp/etag/issues"
   },
   "contributors": [
     {
       "name": "Douglas Christopher Wilson",
       "email": "doug@somethingdoug.com"
+    },
+    {
+      "name": "David Björklund",
+      "email": "david.bjorklund@gmail.com"
     }
   ],
-  "description": "Encode a URL to a percent-encoded form, excluding already-encoded sequences",
+  "description": "Create simple HTTP ETags",
   "devDependencies": {
+    "beautify-benchmark": "0.2.4",
+    "benchmark": "2.1.4",
     "eslint": "3.19.0",
     "eslint-config-standard": "10.2.1",
-    "eslint-plugin-import": "2.8.0",
-    "eslint-plugin-node": "5.2.1",
-    "eslint-plugin-promise": "3.6.0",
+    "eslint-plugin-import": "2.7.0",
+    "eslint-plugin-markdown": "1.0.0-beta.6",
+    "eslint-plugin-node": "5.1.1",
+    "eslint-plugin-promise": "3.5.0",
     "eslint-plugin-standard": "3.0.1",
     "istanbul": "0.4.5",
-    "mocha": "2.5.3"
+    "mocha": "1.21.5",
+    "safe-buffer": "5.1.1",
+    "seedrandom": "2.4.3"
   },
   "engines": {
-    "node": ">= 0.8"
+    "node": ">= 0.6"
   },
   "files": [
     "LICENSE",
@@ -59,23 +66,24 @@
     "README.md",
     "index.js"
   ],
-  "homepage": "https://github.com/pillarjs/encodeurl#readme",
+  "homepage": "https://github.com/jshttp/etag#readme",
   "keywords": [
-    "encode",
-    "encodeurl",
-    "url"
+    "etag",
+    "http",
+    "res"
   ],
   "license": "MIT",
-  "name": "encodeurl",
+  "name": "etag",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/pillarjs/encodeurl.git"
+    "url": "git+https://github.com/jshttp/etag.git"
   },
   "scripts": {
-    "lint": "eslint .",
+    "bench": "node benchmark/index.js",
+    "lint": "eslint --plugin markdown --ext js,md .",
     "test": "mocha --reporter spec --bail --check-leaks test/",
     "test-cov": "istanbul cover node_modules/mocha/bin/_mocha -- --reporter dot --check-leaks test/",
     "test-travis": "istanbul cover node_modules/mocha/bin/_mocha --report lcovonly -- --reporter spec --check-leaks test/"
   },
-  "version": "1.0.2"
+  "version": "1.8.1"
 }
