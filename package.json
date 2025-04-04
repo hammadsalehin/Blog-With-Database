@@ -1,48 +1,60 @@
 {
   "_args": [
     [
-      "forwarded@0.1.2",
+      "fresh@0.5.2",
       "/Users/angelayu/Desktop/ejs-challenge"
     ]
   ],
-  "_from": "forwarded@0.1.2",
-  "_id": "forwarded@0.1.2",
+  "_from": "fresh@0.5.2",
+  "_id": "fresh@0.5.2",
   "_inBundle": false,
-  "_integrity": "sha1-mMI9qxF1ZXuMBXPozszZGw/xjIQ=",
-  "_location": "/forwarded",
+  "_integrity": "sha1-PYyt2Q2XZWn6g1qx+OSyOhBWBac=",
+  "_location": "/fresh",
   "_phantomChildren": {},
   "_requested": {
     "type": "version",
     "registry": true,
-    "raw": "forwarded@0.1.2",
-    "name": "forwarded",
-    "escapedName": "forwarded",
-    "rawSpec": "0.1.2",
+    "raw": "fresh@0.5.2",
+    "name": "fresh",
+    "escapedName": "fresh",
+    "rawSpec": "0.5.2",
     "saveSpec": null,
-    "fetchSpec": "0.1.2"
+    "fetchSpec": "0.5.2"
   },
   "_requiredBy": [
-    "/proxy-addr"
+    "/express",
+    "/send"
   ],
-  "_resolved": "https://registry.npmjs.org/forwarded/-/forwarded-0.1.2.tgz",
-  "_spec": "0.1.2",
+  "_resolved": "https://registry.npmjs.org/fresh/-/fresh-0.5.2.tgz",
+  "_spec": "0.5.2",
   "_where": "/Users/angelayu/Desktop/ejs-challenge",
+  "author": {
+    "name": "TJ Holowaychuk",
+    "email": "tj@vision-media.ca",
+    "url": "http://tjholowaychuk.com"
+  },
   "bugs": {
-    "url": "https://github.com/jshttp/forwarded/issues"
+    "url": "https://github.com/jshttp/fresh/issues"
   },
   "contributors": [
     {
       "name": "Douglas Christopher Wilson",
       "email": "doug@somethingdoug.com"
+    },
+    {
+      "name": "Jonathan Ong",
+      "email": "me@jongleberry.com",
+      "url": "http://jongleberry.com"
     }
   ],
-  "description": "Parse HTTP X-Forwarded-For header",
+  "description": "HTTP response freshness testing",
   "devDependencies": {
     "beautify-benchmark": "0.2.4",
     "benchmark": "2.1.4",
     "eslint": "3.19.0",
     "eslint-config-standard": "10.2.1",
     "eslint-plugin-import": "2.7.0",
+    "eslint-plugin-markdown": "1.0.0-beta.6",
     "eslint-plugin-node": "5.1.1",
     "eslint-plugin-promise": "3.5.0",
     "eslint-plugin-standard": "3.0.1",
@@ -53,29 +65,29 @@
     "node": ">= 0.6"
   },
   "files": [
-    "LICENSE",
     "HISTORY.md",
-    "README.md",
+    "LICENSE",
     "index.js"
   ],
-  "homepage": "https://github.com/jshttp/forwarded#readme",
+  "homepage": "https://github.com/jshttp/fresh#readme",
   "keywords": [
-    "x-forwarded-for",
+    "fresh",
     "http",
-    "req"
+    "conditional",
+    "cache"
   ],
   "license": "MIT",
-  "name": "forwarded",
+  "name": "fresh",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jshttp/forwarded.git"
+    "url": "git+https://github.com/jshttp/fresh.git"
   },
   "scripts": {
     "bench": "node benchmark/index.js",
-    "lint": "eslint .",
+    "lint": "eslint --plugin markdown --ext js,md .",
     "test": "mocha --reporter spec --bail --check-leaks test/",
     "test-cov": "istanbul cover node_modules/mocha/bin/_mocha -- --reporter dot --check-leaks test/",
     "test-travis": "istanbul cover node_modules/mocha/bin/_mocha --report lcovonly -- --reporter spec --check-leaks test/"
   },
-  "version": "0.1.2"
+  "version": "0.5.2"
 }
