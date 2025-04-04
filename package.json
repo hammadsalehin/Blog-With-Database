@@ -1,82 +1,81 @@
 {
   "_args": [
     [
-      "ejs@2.6.1",
+      "encodeurl@1.0.2",
       "/Users/angelayu/Desktop/ejs-challenge"
     ]
   ],
-  "_from": "ejs@2.6.1",
-  "_id": "ejs@2.6.1",
+  "_from": "encodeurl@1.0.2",
+  "_id": "encodeurl@1.0.2",
   "_inBundle": false,
-  "_integrity": "sha512-0xy4A/twfrRCnkhfk8ErDi5DqdAsAqeGxht4xkCUrsvhhbQNs7E+4jV0CN7+NKIY0aHE72+XvqtBIXzD31ZbXQ==",
-  "_location": "/ejs",
+  "_integrity": "sha1-rT/0yG7C0CkyL1oCw6mmBslbP1k=",
+  "_location": "/encodeurl",
   "_phantomChildren": {},
   "_requested": {
     "type": "version",
     "registry": true,
-    "raw": "ejs@2.6.1",
-    "name": "ejs",
-    "escapedName": "ejs",
-    "rawSpec": "2.6.1",
+    "raw": "encodeurl@1.0.2",
+    "name": "encodeurl",
+    "escapedName": "encodeurl",
+    "rawSpec": "1.0.2",
     "saveSpec": null,
-    "fetchSpec": "2.6.1"
+    "fetchSpec": "1.0.2"
   },
   "_requiredBy": [
-    "/"
+    "/express",
+    "/finalhandler",
+    "/send",
+    "/serve-static"
   ],
-  "_resolved": "https://registry.npmjs.org/ejs/-/ejs-2.6.1.tgz",
-  "_spec": "2.6.1",
+  "_resolved": "https://registry.npmjs.org/encodeurl/-/encodeurl-1.0.2.tgz",
+  "_spec": "1.0.2",
   "_where": "/Users/angelayu/Desktop/ejs-challenge",
-  "author": {
-    "name": "Matthew Eernisse",
-    "email": "mde@fleegix.org",
-    "url": "http://fleegix.org"
-  },
   "bugs": {
-    "url": "https://github.com/mde/ejs/issues"
+    "url": "https://github.com/pillarjs/encodeurl/issues"
   },
   "contributors": [
     {
-      "name": "Timothy Gu",
-      "email": "timothygu99@gmail.com",
-      "url": "https://timothygu.github.io"
+      "name": "Douglas Christopher Wilson",
+      "email": "doug@somethingdoug.com"
     }
   ],
-  "dependencies": {},
-  "description": "Embedded JavaScript templates",
+  "description": "Encode a URL to a percent-encoded form, excluding already-encoded sequences",
   "devDependencies": {
-    "browserify": "^13.1.1",
-    "eslint": "^4.14.0",
-    "git-directory-deploy": "^1.5.1",
-    "istanbul": "~0.4.3",
-    "jake": "^8.0.16",
-    "jsdoc": "^3.4.0",
-    "lru-cache": "^4.0.1",
-    "mocha": "^5.0.5",
-    "uglify-js": "^3.3.16"
+    "eslint": "3.19.0",
+    "eslint-config-standard": "10.2.1",
+    "eslint-plugin-import": "2.8.0",
+    "eslint-plugin-node": "5.2.1",
+    "eslint-plugin-promise": "3.6.0",
+    "eslint-plugin-standard": "3.0.1",
+    "istanbul": "0.4.5",
+    "mocha": "2.5.3"
   },
   "engines": {
-    "node": ">=0.10.0"
+    "node": ">= 0.8"
   },
-  "homepage": "https://github.com/mde/ejs",
-  "keywords": [
-    "template",
-    "engine",
-    "ejs"
+  "files": [
+    "LICENSE",
+    "HISTORY.md",
+    "README.md",
+    "index.js"
   ],
-  "license": "Apache-2.0",
-  "main": "./lib/ejs.js",
-  "name": "ejs",
+  "homepage": "https://github.com/pillarjs/encodeurl#readme",
+  "keywords": [
+    "encode",
+    "encodeurl",
+    "url"
+  ],
+  "license": "MIT",
+  "name": "encodeurl",
   "repository": {
     "type": "git",
-    "url": "git://github.com/mde/ejs.git"
+    "url": "git+https://github.com/pillarjs/encodeurl.git"
   },
   "scripts": {
-    "coverage": "istanbul cover node_modules/mocha/bin/_mocha",
-    "devdoc": "jake doc[dev]",
-    "doc": "jake doc",
-    "lint": "eslint \"**/*.js\" Jakefile",
-    "test": "jake test"
+    "lint": "eslint .",
+    "test": "mocha --reporter spec --bail --check-leaks test/",
+    "test-cov": "istanbul cover node_modules/mocha/bin/_mocha -- --reporter dot --check-leaks test/",
+    "test-travis": "istanbul cover node_modules/mocha/bin/_mocha --report lcovonly -- --reporter spec --check-leaks test/"
   },
-  "version": "2.6.1"
+  "version": "1.0.2"
 }
