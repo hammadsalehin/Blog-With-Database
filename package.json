@@ -1,49 +1,51 @@
 {
   "_args": [
     [
-      "content-disposition@0.5.2",
+      "content-type@1.0.4",
       "/Users/angelayu/Desktop/ejs-challenge"
     ]
   ],
-  "_from": "content-disposition@0.5.2",
-  "_id": "content-disposition@0.5.2",
+  "_from": "content-type@1.0.4",
+  "_id": "content-type@1.0.4",
   "_inBundle": false,
-  "_integrity": "sha1-DPaLud318r55YcOoUXjLhdunjLQ=",
-  "_location": "/content-disposition",
+  "_integrity": "sha512-hIP3EEPs8tB9AT1L+NUqtwOAps4mk2Zob89MWXMHjHWg9milF/j4osnnQLXBCBFBk/tvIG/tUc9mOUJiPBhPXA==",
+  "_location": "/content-type",
   "_phantomChildren": {},
   "_requested": {
     "type": "version",
     "registry": true,
-    "raw": "content-disposition@0.5.2",
-    "name": "content-disposition",
-    "escapedName": "content-disposition",
-    "rawSpec": "0.5.2",
+    "raw": "content-type@1.0.4",
+    "name": "content-type",
+    "escapedName": "content-type",
+    "rawSpec": "1.0.4",
     "saveSpec": null,
-    "fetchSpec": "0.5.2"
+    "fetchSpec": "1.0.4"
   },
   "_requiredBy": [
-    "/express"
+    "/body-parser",
+    "/express",
+    "/express/body-parser"
   ],
-  "_resolved": "https://registry.npmjs.org/content-disposition/-/content-disposition-0.5.2.tgz",
-  "_spec": "0.5.2",
+  "_resolved": "https://registry.npmjs.org/content-type/-/content-type-1.0.4.tgz",
+  "_spec": "1.0.4",
   "_where": "/Users/angelayu/Desktop/ejs-challenge",
-  "bugs": {
-    "url": "https://github.com/jshttp/content-disposition/issues"
+  "author": {
+    "name": "Douglas Christopher Wilson",
+    "email": "doug@somethingdoug.com"
   },
-  "contributors": [
-    {
-      "name": "Douglas Christopher Wilson",
-      "email": "doug@somethingdoug.com"
-    }
-  ],
-  "description": "Create and parse Content-Disposition header",
+  "bugs": {
+    "url": "https://github.com/jshttp/content-type/issues"
+  },
+  "description": "Create and parse HTTP Content-Type header",
   "devDependencies": {
-    "eslint": "3.11.1",
-    "eslint-config-standard": "6.2.1",
-    "eslint-plugin-promise": "3.3.0",
-    "eslint-plugin-standard": "2.0.1",
+    "eslint": "3.19.0",
+    "eslint-config-standard": "10.2.1",
+    "eslint-plugin-import": "2.7.0",
+    "eslint-plugin-node": "5.1.1",
+    "eslint-plugin-promise": "3.5.0",
+    "eslint-plugin-standard": "3.0.1",
     "istanbul": "0.4.5",
-    "mocha": "1.21.5"
+    "mocha": "~1.21.5"
   },
   "engines": {
     "node": ">= 0.6"
@@ -54,24 +56,25 @@
     "README.md",
     "index.js"
   ],
-  "homepage": "https://github.com/jshttp/content-disposition#readme",
+  "homepage": "https://github.com/jshttp/content-type#readme",
   "keywords": [
-    "content-disposition",
+    "content-type",
     "http",
-    "rfc6266",
-    "res"
+    "req",
+    "res",
+    "rfc7231"
   ],
   "license": "MIT",
-  "name": "content-disposition",
+  "name": "content-type",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jshttp/content-disposition.git"
+    "url": "git+https://github.com/jshttp/content-type.git"
   },
   "scripts": {
     "lint": "eslint .",
-    "test": "mocha --reporter spec --bail --check-leaks test/",
-    "test-cov": "istanbul cover node_modules/mocha/bin/_mocha -- --reporter dot --check-leaks test/",
-    "test-travis": "istanbul cover node_modules/mocha/bin/_mocha --report lcovonly -- --reporter spec --check-leaks test/"
+    "test": "mocha --reporter spec --check-leaks --bail test/",
+    "test-ci": "istanbul cover node_modules/mocha/bin/_mocha --report lcovonly -- --reporter spec --check-leaks test/",
+    "test-cov": "istanbul cover node_modules/mocha/bin/_mocha -- --reporter dot --check-leaks test/"
   },
-  "version": "0.5.2"
+  "version": "1.0.4"
 }
