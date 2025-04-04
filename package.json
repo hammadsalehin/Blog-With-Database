@@ -1,74 +1,60 @@
 {
   "_args": [
     [
-      "cookie@0.3.1",
+      "cookie-signature@1.0.6",
       "/Users/angelayu/Desktop/ejs-challenge"
     ]
   ],
-  "_from": "cookie@0.3.1",
-  "_id": "cookie@0.3.1",
+  "_from": "cookie-signature@1.0.6",
+  "_id": "cookie-signature@1.0.6",
   "_inBundle": false,
-  "_integrity": "sha1-5+Ch+e9DtMi6klxcWpboBtFoc7s=",
-  "_location": "/cookie",
+  "_integrity": "sha1-4wOogrNCzD7oylE6eZmXNNqzriw=",
+  "_location": "/cookie-signature",
   "_phantomChildren": {},
   "_requested": {
     "type": "version",
     "registry": true,
-    "raw": "cookie@0.3.1",
-    "name": "cookie",
-    "escapedName": "cookie",
-    "rawSpec": "0.3.1",
+    "raw": "cookie-signature@1.0.6",
+    "name": "cookie-signature",
+    "escapedName": "cookie-signature",
+    "rawSpec": "1.0.6",
     "saveSpec": null,
-    "fetchSpec": "0.3.1"
+    "fetchSpec": "1.0.6"
   },
   "_requiredBy": [
     "/express"
   ],
-  "_resolved": "https://registry.npmjs.org/cookie/-/cookie-0.3.1.tgz",
-  "_spec": "0.3.1",
+  "_resolved": "https://registry.npmjs.org/cookie-signature/-/cookie-signature-1.0.6.tgz",
+  "_spec": "1.0.6",
   "_where": "/Users/angelayu/Desktop/ejs-challenge",
   "author": {
-    "name": "Roman Shtylman",
-    "email": "shtylman@gmail.com"
+    "name": "TJ Holowaychuk",
+    "email": "tj@learnboost.com"
   },
   "bugs": {
-    "url": "https://github.com/jshttp/cookie/issues"
+    "url": "https://github.com/visionmedia/node-cookie-signature/issues"
   },
-  "contributors": [
-    {
-      "name": "Douglas Christopher Wilson",
-      "email": "doug@somethingdoug.com"
-    }
-  ],
-  "description": "HTTP server cookie parsing and serialization",
+  "dependencies": {},
+  "description": "Sign and unsign cookies",
   "devDependencies": {
-    "istanbul": "0.4.3",
-    "mocha": "1.21.5"
+    "mocha": "*",
+    "should": "*"
   },
-  "engines": {
-    "node": ">= 0.6"
-  },
-  "files": [
-    "HISTORY.md",
-    "LICENSE",
-    "README.md",
-    "index.js"
-  ],
-  "homepage": "https://github.com/jshttp/cookie#readme",
+  "homepage": "https://github.com/visionmedia/node-cookie-signature#readme",
   "keywords": [
     "cookie",
-    "cookies"
+    "sign",
+    "unsign"
   ],
   "license": "MIT",
-  "name": "cookie",
+  "main": "index",
+  "name": "cookie-signature",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jshttp/cookie.git"
+    "url": "git+https://github.com/visionmedia/node-cookie-signature.git"
   },
   "scripts": {
-    "test": "mocha --reporter spec --bail --check-leaks test/",
-    "test-ci": "istanbul cover node_modules/mocha/bin/_mocha --report lcovonly -- --reporter spec --check-leaks test/",
-    "test-cov": "istanbul cover node_modules/mocha/bin/_mocha -- --reporter dot --check-leaks test/"
+    "test": "mocha --require should --reporter spec"
   },
-  "version": "0.3.1"
+  "version": "1.0.6"
 }
