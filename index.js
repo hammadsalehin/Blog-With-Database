@@ -1,5 +1,5 @@
 /*!
- * destroy
+ * ee-first
  * Copyright(c) 2014 Jonathan Ong
  * MIT Licensed
  */
@@ -7,69 +7,89 @@
 'use strict'
 
 /**
- * Module dependencies.
- * @private
- */
-
-var ReadStream = require('fs').ReadStream
-var Stream = require('stream')
-
-/**
  * Module exports.
  * @public
  */
 
-module.exports = destroy
+module.exports = first
 
 /**
- * Destroy a stream.
+ * Get the first event in a set of event emitters and event pairs.
  *
- * @param {object} stream
+ * @param {array} stuff
+ * @param {function} done
  * @public
  */
 
-function destroy(stream) {
-  if (stream instanceof ReadStream) {
-    return destroyReadStream(stream)
+function first(stuff, done) {
+  if (!Array.isArray(stuff))
+    throw new TypeError('arg must be an array of [ee, events...] arrays')
+
+  var cleanups = []
+
+  for (var i = 0; i < stuff.length; i++) {
+    var arr = stuff[i]
+
+    if (!Array.isArray(arr) || arr.length < 2)
+      throw new TypeError('each array member must be [ee, events...]')
+
+    var ee = arr[0]
+
+    for (var j = 1; j < arr.length; j++) {
+      var event = arr[j]
+      var fn = listener(event, callback)
+
+      // listen to the event
+      ee.on(event, fn)
+      // push this listener to the list of cleanups
+      cleanups.push({
+        ee: ee,
+        event: event,
+        fn: fn,
+      })
+    }
   }
 
-  if (!(stream instanceof Stream)) {
-    return stream
+  function callback() {
+    cleanup()
+    done.apply(null, arguments)
   }
 
-  if (typeof stream.destroy === 'function') {
-    stream.destroy()
+  function cleanup() {
+    var x
+    for (var i = 0; i < cleanups.length; i++) {
+      x = cleanups[i]
+      x.ee.removeListener(x.event, x.fn)
+    }
   }
 
-  return stream
+  function thunk(fn) {
+    done = fn
+  }
+
+  thunk.cancel = cleanup
+
+  return thunk
 }
 
 /**
- * Destroy a ReadStream.
- *
- * @param {object} stream
+ * Create the event listener.
  * @private
  */
 
-function destroyReadStream(stream) {
-  stream.destroy()
+function listener(event, done) {
+  return function onevent(arg1) {
+    var args = new Array(arguments.length)
+    var ee = this
+    var err = event === 'error'
+      ? arg1
+      : null
 
-  if (typeof stream.close === 'function') {
-    // node.js core bug work-around
-    stream.on('open', onOpenClose)
-  }
+    // copy args to prevent arguments escaping scope
+    for (var i = 0; i < args.length; i++) {
+      args[i] = arguments[i]
+    }
 
-  return stream
-}
-
-/**
- * On open handler to close stream.
- * @private
- */
-
-function onOpenClose() {
-  if (typeof this.fd === 'number') {
-    // actually close down the fd
-    this.close()
+    done(err, ee, event, args)
   }
 }
